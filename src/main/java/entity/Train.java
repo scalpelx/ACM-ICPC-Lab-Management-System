@@ -12,6 +12,7 @@ public class Train {
     private Timestamp beginDate;
     private Timestamp endDate;
     private String problems;
+    private List<Student> students;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -89,9 +90,11 @@ public class Train {
         return result;
     }
 
-    @ManyToMany(mappedBy = "trains")
-    private List<Student> students;
-
+    //@ManyToMany(mappedBy = "trains")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "stu_tr",
+            joinColumns = @JoinColumn(name = "train_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "scholar", referencedColumnName = "scholar"))
     public List<Student> getStudents() {
         return students;
     }

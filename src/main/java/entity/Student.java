@@ -14,6 +14,7 @@ public class Student {
     private String phone;
     private int sex;
     private String hdu;
+    private List<Train> trains;
 
     @Id
     @Column(name = "scholar", nullable = false, length = 15)
@@ -115,11 +116,13 @@ public class Student {
         return result;
     }
 
+    /*
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "stu_tr",
-            joinColumns = @JoinColumn(name = "scholar"), inverseJoinColumns = @JoinColumn(name = "train_id"))
-    private List<Train> trains;
-
+            joinColumns = @JoinColumn(name = "scholar", referencedColumnName = "scholar"),
+            inverseJoinColumns = @JoinColumn(name = "train_id", referencedColumnName = "id"))
+    */
+    @ManyToMany(mappedBy = "students")
     public List<Train> getTrains() {
         return trains;
     }

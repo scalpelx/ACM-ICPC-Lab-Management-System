@@ -9,6 +9,7 @@ import service.StudentService;
 import service.TrainService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller("trainAction")
@@ -18,7 +19,7 @@ public class TrainAction extends ActionSupport {
     @Resource
     private TrainService trainService;
     @Resource
-    StudentService studentService;
+    private StudentService studentService;
 
     private Train train;
     private String stuScholars;
@@ -40,7 +41,10 @@ public class TrainAction extends ActionSupport {
     }
 
     public String addTrain() {
-        List<Student> students = null;
+        List<Student> students = new ArrayList();
+        System.out.println(stuScholars);
+        if (studentService.getStudentByScholar(stuScholars) == null)
+            System.out.println("none");
         students.add(studentService.getStudentByScholar(stuScholars));
         students.add(studentService.getStudentByScholar("20141222171"));
         train.setStudents(students);

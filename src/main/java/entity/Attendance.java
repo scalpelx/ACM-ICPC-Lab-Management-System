@@ -66,6 +66,7 @@ public class Attendance {
 
     @ManyToOne
     @JoinColumn(name = "scholar", referencedColumnName = "scholar", nullable = false)
+
     public Student getStudentByScholar() {
         return studentByScholar;
     }
