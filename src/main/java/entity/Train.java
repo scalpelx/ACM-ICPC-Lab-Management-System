@@ -2,7 +2,7 @@ package entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "train")
@@ -12,8 +12,6 @@ public class Train {
     private Timestamp beginDate;
     private Timestamp endDate;
     private String problems;
-    private String students;
-    private Collection<StuTr> stuTrsById;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -65,16 +63,6 @@ public class Train {
         this.problems = problems;
     }
 
-    @Basic
-    @Column(name = "students", nullable = false, length = 200)
-    public String getStudents() {
-        return students;
-    }
-
-    public void setStudents(String students) {
-        this.students = students;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,7 +75,6 @@ public class Train {
         if (beginDate != null ? !beginDate.equals(train.beginDate) : train.beginDate != null) return false;
         if (endDate != null ? !endDate.equals(train.endDate) : train.endDate != null) return false;
         if (problems != null ? !problems.equals(train.problems) : train.problems != null) return false;
-        if (students != null ? !students.equals(train.students) : train.students != null) return false;
 
         return true;
     }
@@ -99,16 +86,17 @@ public class Train {
         result = 31 * result + (beginDate != null ? beginDate.hashCode() : 0);
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (problems != null ? problems.hashCode() : 0);
-        result = 31 * result + (students != null ? students.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "trainByTrainId")
-    public Collection<StuTr> getStuTrsById() {
-        return stuTrsById;
+    @ManyToMany(mappedBy = "trains")
+    private List<Student> students;
+
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStuTrsById(Collection<StuTr> stuTrsById) {
-        this.stuTrsById = stuTrsById;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

@@ -147,7 +147,7 @@
                     <div class="form-group-col-2">
                         <div class="form-label">学生集合：</div>
                         <div class="form-cont">
-                            <input type="time" class="form-control form-boxed" name="train.students" style="width:400px;" required="">
+                            <input type="text" class="form-control form-boxed" name="stuScholars" style="width:400px;" required="">
                         </div>
                     </div>
                     <div class="form-group-col-2">

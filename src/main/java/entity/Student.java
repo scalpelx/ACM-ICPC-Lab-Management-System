@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -13,7 +14,6 @@ public class Student {
     private String phone;
     private int sex;
     private String hdu;
-    private Collection<StuTr> stuTrsByScholar;
 
     @Id
     @Column(name = "scholar", nullable = false, length = 15)
@@ -115,12 +115,16 @@ public class Student {
         return result;
     }
 
-    @OneToMany(mappedBy = "studentByScholar")
-    public Collection<StuTr> getStuTrsByScholar() {
-        return stuTrsByScholar;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "stu_tr",
+            joinColumns = @JoinColumn(name = "scholar"), inverseJoinColumns = @JoinColumn(name = "train_id"))
+    private List<Train> trains;
+
+    public List<Train> getTrains() {
+        return trains;
     }
 
-    public void setStuTrsByScholar(Collection<StuTr> stuTrsByScholar) {
-        this.stuTrsByScholar = stuTrsByScholar;
+    public void setTrains(List<Train> trains) {
+        this.trains = trains;
     }
 }

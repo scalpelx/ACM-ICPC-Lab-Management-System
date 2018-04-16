@@ -75,5 +75,9 @@
             <result name="success" type="redirect">/student/viewAttendance.jsp</result>
             <result name="error" type="redirect">/student/main.jsp</result>
         </action>
+        <action name="addTrain" class="trainAction" method="addTrain">
+            <result name="success" type="redirect">/admin/addTrain.jsp</result>
+            <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
     </package>
 </struts>
