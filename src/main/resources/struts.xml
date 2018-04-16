@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.objectFactory" value="spring" />
+    <package name="struts" namespace="/" extends="struts-default">
+        <action name="studentLogin" class="studentAction" method="login">
+            <result name="success" type="redirect">/student/main.jsp</result>
+            <result name="error" type="redirect">/student/login.jsp</result>
+            <result name="input" type="redirect">/student/login.jsp</result>
+        </action>
+        <action name="studentRegister" class="studentAction" method="register">
+            <result name="success" type="redirect">/student/login.jsp</result>
+            <result name="error" type="redirect">/student/register.jsp</result>
+            <result name="input" type="redirect">/student/register.jsp</result>
+        </action>
+        <action name="studentModifyInfo" class="studentAction" method="modifyInfo">
+            <result name="success" type="redirect">/student/main.jsp</result>
+            <result name="error" type="redirect">/student/modifyInfo.jsp</result>
+            <result name="input" type="redirect">/student/modifyInfo.jsp</result>
+        </action>
+        <action name="studentModifyPassword" class="studentAction" method="modifyPassword">
+            <result name="success" type="redirect">/student/main.jsp</result>
+            <result name="error" type="redirect">/student/modifyPassword.jsp</result>
+            <result name="input" type="redirect">/student/modifyPassword.jsp</result>
+        </action>
+        <action name="studentView" class="studentAction" method="view">
+            <result name="success" type="redirect">/student/viewInfo.jsp</result>
+            <result name="error" type="redirect">/student/main.jsp</result>
+        </action>
+        <action name="viewAllStudents" class="studentAction" method="viewAllStudents">
+            <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
+            <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
+        <action name="deleteStudent" class="studentAction" method="deleteStudent">
+            <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
+            <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
+        <action name="modifyStudent" class="studentAction" method="modifyInfo">
+            <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
+            <result name="error" type="redirect">/admin/modifyStudent.jsp</result>
+        </action>
+        <action name="adminLogin" class="adminAction" method="login">
+            <result name="success" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/login.jsp</result>
+            <result name="input" type="redirect">/admin/login.jsp</result>
+        </action>
+        <action name="adminModifyPassword" class="adminAction" method="modifyPassword">
+            <result name="success" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/modifyPassword.jsp</result>
+        </action>
+        <action name="adminModifyInfo" class="adminAction" method="modifyInfo">
+            <result name="success" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/modifyInfo.jsp</result>
+        </action>
+        <action name="addAttendance" class="attendanceAction" method="addAttendance">
+            <result name="success" type="redirect">/admin/addAttendance.jsp</result>
+            <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
+        <action name="deleteAttendance" class="attendanceAction" method="deleteAttendance">
+            <result name="success" type="redirect">/admin/listAttendance.jsp</result>
+            <result name="error" type="redirect">/admin/listAttendance.jsp</result>
+        </action>
+        <action name="listAttendance" class="attendanceAction" method="listAttendance">
+            <result name="success" type="redirect">/admin/listAttendance.jsp</result>
+            <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
+        <action name="listStudentAttendances" class="attendanceAction" method="listStudentAttendances">
+            <result name="success" type="redirect">/admin/viewStudentAttendance.jsp</result>
+            <result name="error" type="redirect">/admin/viewAllStudents.jsp</result>
+        </action>
+        <action name="viewAttendances" class="attendanceAction" method="viewAttendances">
+            <result name="success" type="redirect">/student/viewAttendance.jsp</result>
+            <result name="error" type="redirect">/student/main.jsp</result>
+        </action>
+    </package>
+</struts>
