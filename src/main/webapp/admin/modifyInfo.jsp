@@ -82,7 +82,7 @@
                             <i class="icon-inbox"></i>训练计划<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="/admin/addTrain.jsp">分配训练计划</a>
+                            <a href="trainPre">分配训练计划</a>
                         </dd>
                         <dd>
                             <a href="/listTrains">查看训练计划</a>

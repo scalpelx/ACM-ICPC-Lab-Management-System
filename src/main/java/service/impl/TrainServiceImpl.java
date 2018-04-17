@@ -26,6 +26,11 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
+    public boolean updateTrain(Train train) {
+        return this.trainDao.update(train);
+    }
+
+    @Override
     public List getTrains() {
         return this.trainDao.getTrains();
     }

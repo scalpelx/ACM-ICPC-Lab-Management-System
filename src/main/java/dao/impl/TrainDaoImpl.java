@@ -35,6 +35,12 @@ public class TrainDaoImpl implements TrainDao {
     }
 
     @Override
+    public boolean update(Train train) {
+        sessionFactory.getCurrentSession().update(train);
+        return true;
+    }
+
+    @Override
     public List getTrains() {
         return sessionFactory.getCurrentSession().createQuery("FROM Train").list();
     }

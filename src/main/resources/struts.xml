@@ -42,6 +42,7 @@
             <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
             <result name="error" type="redirect">/admin/modifyStudent.jsp</result>
         </action>
+
         <action name="adminLogin" class="adminAction" method="login">
             <result name="success" type="redirect">/admin/admin.jsp</result>
             <result name="error" type="redirect">/admin/login.jsp</result>
@@ -55,6 +56,7 @@
             <result name="success" type="redirect">/admin/admin.jsp</result>
             <result name="error" type="redirect">/admin/modifyInfo.jsp</result>
         </action>
+
         <action name="addAttendance" class="attendanceAction" method="addAttendance">
             <result name="success" type="redirect">/admin/addAttendance.jsp</result>
             <result name="error" type="redirect">/admin/admin.jsp</result>
@@ -75,6 +77,7 @@
             <result name="success" type="redirect">/student/viewAttendance.jsp</result>
             <result name="error" type="redirect">/student/main.jsp</result>
         </action>
+
         <action name="trainPre" class="trainAction" method="pre">
             <result name="success" type="redirect">/admin/addTrain.jsp</result>
             <result name="error" type="redirect">/admin/admin.jsp</result>
@@ -93,6 +96,10 @@
         </action>
         <action name="deleteTrain" class="trainAction" method="deleteTrain">
             <result name="success" type="redirect">/admin/listTrains.jsp</result>
+            <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
+        <action name="modifyTrain" class="trainAction" method="modifyTrain">
+            <result name="success" type="redirect">/admin/modifyTrain.jsp</result>
             <result name="error" type="redirect">/admin/admin.jsp</result>
         </action>
     </package>

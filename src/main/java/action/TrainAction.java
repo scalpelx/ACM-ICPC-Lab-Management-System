@@ -48,7 +48,6 @@ public class TrainAction extends ActionSupport {
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         String[] scholars = request.getParameterValues("scholars");
         for (String scholar : scholars) {
-            System.out.println(scholar);
             students.add(studentService.getStudentByScholar(scholar));
         }
         train.setStudents(students);
@@ -82,6 +81,18 @@ public class TrainAction extends ActionSupport {
         List<Train> trains = trainService.getTrains();
         Map session = ActionContext.getContext().getSession();
         session.put("trains", trains);
+        return SUCCESS;
+    }
+
+    public String modifyTrain() {
+        List<Student> students = new ArrayList();
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        String[] scholars = request.getParameterValues("scholars");
+        for (String scholar : scholars) {
+            students.add(studentService.getStudentByScholar(scholar));
+        }
+        train.setStudents(students);
+        trainService.updateTrain(train);
         return SUCCESS;
     }
 }
