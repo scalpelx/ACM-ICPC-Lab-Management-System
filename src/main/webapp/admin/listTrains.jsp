@@ -1,6 +1,8 @@
-<%@ page import="entity.Student" %>
-<%@ page import="java.util.Date" %>
+<%@ page import="entity.Admin" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="entity.Train" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -27,18 +29,18 @@
     <div class="side-nav">
         <div class="side-logo">
             <div class="logo">
-                <span class="logo-ico">
-                    <i class="i-l-1"></i>
-                    <i class="i-l-2"></i>
-                    <i class="i-l-3"></i>
-                </span>
+				<span class="logo-ico">
+					<i class="i-l-1"></i>
+					<i class="i-l-2"></i>
+					<i class="i-l-3"></i>
+				</span>
                 <strong>济大ACM实验室管理系统</strong>
             </div>
         </div>
 
         <nav class="side-menu content mCustomScrollbar" data-mcs-theme="minimal-dark">
             <h2>
-                <a href="/student/main.jsp" class="InitialPage"><i class="icon-dashboard"></i>系统首页</a>
+                <a href="/admin/admin.jsp" class="InitialPage"><i class="icon-dashboard"></i>系统首页</a>
             </h2>
             <ul>
                 <li>
@@ -47,14 +49,18 @@
                             <i class="icon-table"></i>信息管理<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="/studentView">查看个人信息</a>
+                            <a href="/admin/modifyInfo.jsp">修改个人信息</a>
                         </dd>
                         <dd>
-                            <a href="/student/modifyInfo.jsp">修改个人信息</a>
+                            <a href="/admin/modifyPassword.jsp">修改密码</a>
                         </dd>
-                        <dd>
-                            <a href="/student/modifyPassword.jsp">修改密码</a>
-                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-columns"></i><a href="/viewAllStudents">成员管理</a>
+                        </dt>
                     </dl>
                 </li>
                 <li>
@@ -63,7 +69,10 @@
                             <i class="icon-list-alt"></i>考勤管理<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="/viewAttendances?startDate=<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>&endDate=<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>">
+                            <a href="/admin/addAttendance.jsp">录入考勤信息</a>
+                        </dd>
+                        <dd>
+                            <a href="/listAttendance?startDate=<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>&endDate=<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>">
                                 查看考勤
                             </a>
                         </dd>
@@ -75,20 +84,10 @@
                             <i class="icon-inbox"></i>训练计划<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="/listStudentTrains?scholar=<%= ((Student)session.getAttribute("student")).getScholar() %>">查看训练计划</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt>
-                            <i class="icon-columns"></i>统计及评价<i class="icon-angle-right"></i>
-                        </dt>
-                        <dd>
-                            <a href="">日常表现统计</a>
+                            <a href="/admin/addTrain.jsp">分配训练计划</a>
                         </dd>
                         <dd>
-                            <a href="">我的评价</a>
+                            <a href="/listTrains">查看训练计划</a>
                         </dd>
                     </dl>
                 </li>
@@ -104,7 +103,7 @@
             <div class="hd-rt">
                 <ul>
                     <li>
-                        <a><i class="icon-user"></i>用户:<em><%= ((Student)session.getAttribute("student")).getName() %></em></a>
+                        <a><i class="icon-user"></i>管理员:<em><%= ((Admin)session.getAttribute("admin")).getName() %></em></a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" id="JsSignOut"><i class="icon-signout"></i>退出</a>
@@ -114,43 +113,52 @@
         </header>
         <main class="main-cont content mCustomScrollbar">
             <!--开始::内容-->
-            ${error}
             <div class="page-wrap">
                 <section class="page-hd">
                     <header>
-                        <h2 class="title"><i class="icon-home"></i>济南大学ACM实验室管理系统</h2>
+                        <h2 class="title">查看全部训练计划</h2>
                     </header>
                     <hr>
                 </section>
-                <div id="container"></div>
-                <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-                <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-                <script>
-                    var gitment = new Gitment({
-                        id: 'location.href',
-                        owner: 'scalpelx',
-                        repo: 'scalpelx.github.io',
-                        oauth: {
-                            client_id: 'd77275971a5997e96cee',
-                            client_secret: 'a84c23c9b95e1ee1404aa74d2101008cdb056ea0',
-                        },
-                    })
-                    gitment.render('container')
-                </script>
-                <!--开始::结束-->
+                <%
+                    List<Train> trains = (List<Train>) session.getAttribute("trains");
+                    int i = 0;
+                %>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>名称</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <% for (Train train : trains) { %>
+                    <tr class="cen">
+                        <td><%= ++i %></td>
+                        <td><%= train.getName()%></td>
+                        <td><%= new SimpleDateFormat("yyyy-MM-dd hh:mm").format(train.getBeginDate()) %></td>
+                        <td><%= new SimpleDateFormat("yyyy-MM-dd hh:mm").format(train.getEndDate()) %></td>
+                        <td></td>
+                    </tr>
+                    <% } %>
+                </table>
+            </div>
+            <!--开始::结束-->
         </main>
         <footer class="btm-ft">
             <p class="clear">
                 <span class="fl">©Copyright 2018 <a href="">University of Jinan ACM-ICPC Laboratory</a></span>
                 <span class="fr text-info">
-                    <em class="uppercase">
-                        <i class="icon-user"></i>
-                        author:Yongpeng Xie
-                    </em> |
-                    <em class="uppercase"><i class="icon-envelope-alt"></i>
-                        xieyongpeng@mail.ujn.edu.cn
-                    </em>
-                </span>
+					<em class="uppercase">
+						<i class="icon-user"></i>
+						author:Yongpeng Xie
+					</em> |
+					<em class="uppercase"><i class="icon-envelope-alt"></i>
+						xieyongpeng@mail.ujn.edu.cn
+					</em>
+				</span>
             </p>
         </footer>
     </div>

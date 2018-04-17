@@ -116,13 +116,7 @@ public class Student {
         return result;
     }
 
-    /*
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "stu_tr",
-            joinColumns = @JoinColumn(name = "scholar", referencedColumnName = "scholar"),
-            inverseJoinColumns = @JoinColumn(name = "train_id", referencedColumnName = "id"))
-    */
-    @ManyToMany(mappedBy = "students")
+    @ManyToMany(mappedBy = "students", fetch = FetchType.EAGER)
     public List<Train> getTrains() {
         return trains;
     }

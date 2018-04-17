@@ -79,5 +79,13 @@
             <result name="success" type="redirect">/admin/addTrain.jsp</result>
             <result name="error" type="redirect">/admin/admin.jsp</result>
         </action>
+        <action name="listTrains" class="trainAction" method="getTrains">
+            <result name="success" type="redirect">/admin/listTrains.jsp</result>
+            <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
+        <action name="listStudentTrains" class="trainAction" method="listStudentTrains">
+            <result name="success" type="redirect">/student/listMyTrains.jsp</result>
+            <result name="error" type="redirect">/student/main.jsp</result>
+        </action>
     </package>
 </struts>

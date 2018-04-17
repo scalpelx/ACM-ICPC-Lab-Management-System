@@ -90,8 +90,7 @@ public class Train {
         return result;
     }
 
-    //@ManyToMany(mappedBy = "trains")
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "stu_tr",
             joinColumns = @JoinColumn(name = "train_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "scholar", referencedColumnName = "scholar"))

@@ -85,7 +85,7 @@
                             <a href="/admin/addTrain.jsp">分配训练计划</a>
                         </dd>
                         <dd>
-                            <a href="">查看完成情况</a>
+                            <a href="/listTrains">查看训练计划</a>
                         </dd>
                     </dl>
                 </li>
@@ -134,7 +134,8 @@
                     })
                     gitment.render('container')
                 </script>
-                <!--开始::结束-->
+            </div>
+            <!--开始::结束-->
         </main>
         <footer class="btm-ft">
             <p class="clear">

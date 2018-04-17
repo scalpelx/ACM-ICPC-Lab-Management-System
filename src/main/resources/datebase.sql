@@ -135,7 +135,7 @@ DROP TABLE IF EXISTS `train`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `train` (
-  `id` int(11) NOT NULL DEFAULT '0' COMMENT '序号',
+  `id` int(11) NOT NULL DEFAULT '1' COMMENT '序号',
   `name` varchar(30) COLLATE utf8_bin NOT NULL COMMENT '名称',
   `beginDate` datetime NOT NULL COMMENT '开始时间',
   `endDate` datetime NOT NULL COMMENT '结束时间',
