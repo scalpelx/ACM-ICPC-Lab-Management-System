@@ -21,6 +21,11 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
+    public boolean deleteTrain(String id) {
+        return this.trainDao.delete(id);
+    }
+
+    @Override
     public List getTrains() {
         return this.trainDao.getTrains();
     }

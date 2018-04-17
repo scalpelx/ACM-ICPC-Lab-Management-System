@@ -140,7 +140,7 @@
                         <td><%= train.getName()%></td>
                         <td><%= new SimpleDateFormat("yyyy-MM-dd hh:mm").format(train.getBeginDate()) %></td>
                         <td><%= new SimpleDateFormat("yyyy-MM-dd hh:mm").format(train.getEndDate()) %></td>
-                        <td></td>
+                        <td><a href="deleteTrain?id=<%= train.getId() %>">删除</a></td>
                     </tr>
                     <% } %>
                 </table>

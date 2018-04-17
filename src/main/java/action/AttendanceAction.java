@@ -102,7 +102,16 @@ public class AttendanceAction extends ActionSupport {
         String scholar = request.getParameter("scholar");
         String date = request.getParameter("date");
         Map session = ActionContext.getContext().getSession();
+        Attendance attendance = (Attendance) attendanceService.getAttendancesByStudentAndDate(scholar, date, date).get(0);
         if (attendanceService.deleteAttendance(scholar, date)) {
+            List<Attendance> attendances = (List<Attendance>) session.get("attendances");
+            for (Attendance a : attendances) {
+                if (a.equals(attendance)) {
+                    attendances.remove(a);
+                    break;
+                }
+            }
+            session.put("attendances", attendances);
             return SUCCESS;
         } else {
             session.put("error", "删除失败");

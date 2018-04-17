@@ -91,5 +91,9 @@
             <result name="success" type="redirect">/student/listMyTrains.jsp</result>
             <result name="error" type="redirect">/student/main.jsp</result>
         </action>
+        <action name="deleteTrain" class="trainAction" method="deleteTrain">
+            <result name="success" type="redirect">/admin/listTrains.jsp</result>
+            <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
     </package>
 </struts>

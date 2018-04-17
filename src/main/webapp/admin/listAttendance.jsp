@@ -137,6 +137,7 @@
                 <tr>
                     <th>序号</th>
                     <th>姓名</th>
+                    <th>日期</th>
                     <th>签到时间</th>
                     <th>签退时间</th>
                     <th>出勤时间</th>
@@ -151,6 +152,7 @@
                 <tr class="cen">
                     <td><%= ++i %></td>
                     <td><%= attendance.getStudentByScholar().getName() %></td>
+                    <td><%= attendance.getDate() %></td>
                     <td><%= attendance.getArriveTime() %></td>
                     <td><%= attendance.getLeaveTime() %></td>
                     <%

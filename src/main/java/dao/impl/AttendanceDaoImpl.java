@@ -30,7 +30,6 @@ public class AttendanceDaoImpl implements AttendanceDao {
 
     @Override
     public boolean delete(String scholar, String date) {
-        System.out.println(scholar + " " + date);
         String hsql = "delete from Attendance a where a.studentByScholar.scholar = ? and a.date = ?";
         Query query = sessionFactory.getCurrentSession().createQuery(hsql);
         query.setString(0, scholar);

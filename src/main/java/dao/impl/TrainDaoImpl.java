@@ -3,6 +3,7 @@ package dao.impl;
 import dao.TrainDao;
 import entity.Student;
 import entity.Train;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,15 @@ public class TrainDaoImpl implements TrainDao {
     @Override
     public boolean add(Train train) {
         sessionFactory.getCurrentSession().save(train);
+        return true;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        String hsql = "delete from Train t where t.id = ?";
+        Query query = sessionFactory.getCurrentSession().createQuery(hsql);
+        query.setString(0, id);
+        query.executeUpdate();
         return true;
     }
 

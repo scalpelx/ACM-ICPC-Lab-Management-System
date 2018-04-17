@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import service.StudentService;
 import service.TrainService;
+import sun.security.krb5.SCDynamicStoreConfig;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -70,6 +71,16 @@ public class TrainAction extends ActionSupport {
         List trains = trainService.getStudentTrains(student);
         if (trains.isEmpty())
             System.out.println("trains empty");
+        session.put("trains", trains);
+        return SUCCESS;
+    }
+
+    public String deleteTrain() {
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        String id = request.getParameter("id");
+        trainService.deleteTrain(id);
+        List<Train> trains = trainService.getTrains();
+        Map session = ActionContext.getContext().getSession();
         session.put("trains", trains);
         return SUCCESS;
     }
