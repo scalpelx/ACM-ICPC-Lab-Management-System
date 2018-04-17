@@ -149,15 +149,11 @@
                     <div class="form-group-col-2">
                         <div class="form-label">学生集合：</div>
                         <div class="form-cont">
-                            <select multiple="multiple" size="4" name="scholars" style="width:auto;">
-                                <%
-                                    List<Student> students = (List<Student>) session.getAttribute("students");
-                                    for (Student student : students) {
-                                %>
-                                    <option value="<%= student.getScholar() %>"><%= student.getName() %></option>
-                                <%
-                                    }
-                                %>
+                            <% List<Student> students = (List<Student>) session.getAttribute("students"); %>
+                            <select multiple="multiple" size="<%= students.size() %>" name="scholars" style="width:auto;">
+                                <% for (Student student : students) { %>
+                                <option value="<%= student.getScholar() %>"><%= student.getName() %></option>
+                                <% } %>
                             </select>
                         </div>
                     </div>

@@ -1,9 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="entity.Admin" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="entity.Train" %>
+<%@ page import="entity.Student" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,11 +29,11 @@
     <div class="side-nav">
         <div class="side-logo">
             <div class="logo">
-				<span class="logo-ico">
-					<i class="i-l-1"></i>
-					<i class="i-l-2"></i>
-					<i class="i-l-3"></i>
-				</span>
+                <span class="logo-ico">
+                    <i class="i-l-1"></i>
+                    <i class="i-l-2"></i>
+                    <i class="i-l-3"></i>
+                </span>
                 <strong>济大ACM实验室管理系统</strong>
             </div>
         </div>
@@ -96,6 +96,7 @@
         <footer class="side-footer">© 济南大学ACM实验室 版权所有</footer>
     </div>
     <div class="content-wrap">
+        <% Admin admin = (Admin)session.getAttribute("admin"); %>
         <header class="top-hd">
             <div class="hd-lt">
                 <a class="icon-reorder"></a>
@@ -103,7 +104,7 @@
             <div class="hd-rt">
                 <ul>
                     <li>
-                        <a><i class="icon-user"></i>管理员:<em><%= ((Admin)session.getAttribute("admin")).getName() %></em></a>
+                        <a><i class="icon-user"></i>管理员:<em><%= admin.getName() %></em></a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" id="JsSignOut"><i class="icon-signout"></i>退出</a>
@@ -116,37 +117,55 @@
             <div class="page-wrap">
                 <section class="page-hd">
                     <header>
-                        <h2 class="title">查看全部训练计划</h2>
+                        <h2 class="title">修改训练计划</h2>
                     </header>
                     <hr>
                 </section>
-                <%
-                    List<Train> trains = (List<Train>) session.getAttribute("trains");
-                    int i = 0;
-                %>
-                <table class="table table-bordered table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>名称</th>
-                        <th>开始时间</th>
-                        <th>结束时间</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <% for (Train train : trains) { %>
-                    <tr class="cen">
-                        <td><%= ++i %></td>
-                        <td><%= train.getName()%></td>
-                        <td><%= new SimpleDateFormat("yyyy-MM-dd hh:mm").format(train.getBeginDate()) %></td>
-                        <td><%= new SimpleDateFormat("yyyy-MM-dd hh:mm").format(train.getEndDate()) %></td>
-                        <td>
-                            <a href="deleteTrain?id=<%= train.getId() %>">删除</a>
-                            <a href="/admin/modifyTrain.jsp?id=<%= train.getId() %>">修改</a>
-                        </td>
-                    </tr>
-                    <% } %>
-                </table>
+                <form action="modifyTrain" method="post">
+                    <input type="hidden" name="train.id" value="<%=request.getParameter("id")%>">
+                    <div class="form-group-col-2">
+                        <div class="form-label">名称：</div>
+                        <div class="form-cont">
+                            <input type="text" class="form-control form-boxed" name="train.name" style="width:400px;" required="">
+                        </div>
+                    </div>
+                    <div class="form-group-col-2">
+                        <div class="form-label">开始时间：</div>
+                        <div class="form-cont">
+                            <input type="datetime-local" class="form-control form-boxed" name="train.beginDate" value=<%=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(new Date())%> style="width:400px;" required="">
+                        </div>
+                    </div>
+                    <div class="form-group-col-2">
+                        <div class="form-label">结束时间：</div>
+                        <div class="form-cont">
+                            <input type="datetime-local" class="form-control form-boxed" name="train.endDate" value=<%=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(new Date())%> style="width:400px;" required="">
+                        </div>
+                    </div>
+                    <div class="form-group-col-2">
+                        <div class="form-label">题目集合：</div>
+                        <div class="form-cont">
+                            <input type="text" class="form-control form-boxed" name="train.problems" style="width:400px;" required="">
+                        </div>
+                    </div>
+                    <div class="form-group-col-2">
+                        <div class="form-label">学生集合：</div>
+                        <div class="form-cont">
+                            <% List<Student> students = (List<Student>) session.getAttribute("students"); %>
+                            <select multiple="multiple" size="<%= students.size() %>" name="scholars" style="width:auto;">
+                            <% for (Student student : students) { %>
+                                <option value="<%= student.getScholar() %>"><%= student.getName() %></option>
+                            <% } %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group-col-2">
+                        <div class="form-label"></div>
+                        <div class="form-cont">
+                            <input type="submit" class="btn btn-primary" value="提交" />
+                            <input type="reset" class="btn btn-primary" value="重置" />
+                        </div>
+                    </div>
+                </form>
             </div>
             <!--开始::结束-->
         </main>
@@ -154,14 +173,14 @@
             <p class="clear">
                 <span class="fl">©Copyright 2018 <a href="">University of Jinan ACM-ICPC Laboratory</a></span>
                 <span class="fr text-info">
-					<em class="uppercase">
-						<i class="icon-user"></i>
-						author:Yongpeng Xie
-					</em> |
-					<em class="uppercase"><i class="icon-envelope-alt"></i>
-						xieyongpeng@mail.ujn.edu.cn
-					</em>
-				</span>
+                    <em class="uppercase">
+                        <i class="icon-user"></i>
+                        author:Yongpeng Xie
+                    </em> |
+                    <em class="uppercase"><i class="icon-envelope-alt"></i>
+                        xieyongpeng@mail.ujn.edu.cn
+                    </em>
+                </span>
             </p>
         </footer>
     </div>
