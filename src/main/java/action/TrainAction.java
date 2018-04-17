@@ -26,7 +26,6 @@ public class TrainAction extends ActionSupport {
     private StudentService studentService;
 
     private Train train;
-    private String stuScholars;
 
     public Train getTrain() {
         return train;
@@ -36,21 +35,21 @@ public class TrainAction extends ActionSupport {
         this.train = train;
     }
 
-    public String getStuScholars() {
-        return stuScholars;
-    }
-
-    public void setStuScholars(String stuScholars) {
-        this.stuScholars = stuScholars;
+    public String pre() {
+        Map session = ActionContext.getContext().getSession();
+        List students = studentService.getAllStudent();
+        session.put("students", students);
+        return SUCCESS;
     }
 
     public String addTrain() {
         List<Student> students = new ArrayList();
-        System.out.println(stuScholars);
-        if (studentService.getStudentByScholar(stuScholars) == null)
-            System.out.println("none");
-        students.add(studentService.getStudentByScholar(stuScholars));
-        students.add(studentService.getStudentByScholar("20141222171"));
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        String[] scholars = request.getParameterValues("scholars");
+        for (String scholar : scholars) {
+            System.out.println(scholar);
+            students.add(studentService.getStudentByScholar(scholar));
+        }
         train.setStudents(students);
         trainService.addTrain(train);
         return SUCCESS;

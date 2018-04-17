@@ -2,6 +2,8 @@
 <%@ page import="entity.Admin" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="entity.Student" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +87,7 @@
                             <a href="/admin/addTrain.jsp">分配训练计划</a>
                         </dd>
                         <dd>
-                            <a href="">查看完成情况</a>
+                            <a href="/listTrains">查看训练计划</a>
                         </dd>
                     </dl>
                 </li>
@@ -147,7 +149,16 @@
                     <div class="form-group-col-2">
                         <div class="form-label">学生集合：</div>
                         <div class="form-cont">
-                            <input type="text" class="form-control form-boxed" name="stuScholars" style="width:400px;" required="">
+                            <select multiple="multiple" size="4" name="scholars" style="width:auto;">
+                                <%
+                                    List<Student> students = (List<Student>) session.getAttribute("students");
+                                    for (Student student : students) {
+                                %>
+                                    <option value="<%= student.getScholar() %>"><%= student.getName() %></option>
+                                <%
+                                    }
+                                %>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group-col-2">

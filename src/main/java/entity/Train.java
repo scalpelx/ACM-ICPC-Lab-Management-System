@@ -15,6 +15,7 @@ public class Train {
     private List<Student> students;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.TABLE)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

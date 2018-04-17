@@ -75,7 +75,7 @@
                             <i class="icon-inbox"></i>训练计划<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="">查看训练计划</a>
+                            <a href="/listStudentTrains?scholar=<%= ((Student)session.getAttribute("student")).getScholar() %>">查看训练计划</a>
                         </dd>
                     </dl>
                 </li>
