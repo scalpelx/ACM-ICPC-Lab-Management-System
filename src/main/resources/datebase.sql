@@ -66,8 +66,31 @@ CREATE TABLE `attendance` (
 
 LOCK TABLES `attendance` WRITE;
 /*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
-INSERT INTO `attendance` VALUES ('1','2018-04-16','02:00:00','23:00:00'),('20141222171','2018-04-15','02:00:00','23:00:00');
+INSERT INTO `attendance` VALUES ('1','2018-04-16','02:00:00','23:00:00');
 /*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hibernate_sequences`
+--
+
+DROP TABLE IF EXISTS `hibernate_sequences`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hibernate_sequences` (
+  `sequence_name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `sequence_next_hi_value` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hibernate_sequences`
+--
+
+LOCK TABLES `hibernate_sequences` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequences` DISABLE KEYS */;
+INSERT INTO `hibernate_sequences` VALUES ('train',2);
+/*!40000 ALTER TABLE `hibernate_sequences` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -84,9 +107,9 @@ CREATE TABLE `stu_tr` (
   PRIMARY KEY (`id`),
   KEY `fk_stu_tr_1_idx` (`scholar`),
   KEY `fk_stu_tr_2_idx` (`train_id`),
-  CONSTRAINT `fk_stu_tr_1` FOREIGN KEY (`scholar`) REFERENCES `student` (`scholar`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_stu_tr_2` FOREIGN KEY (`train_id`) REFERENCES `train` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  CONSTRAINT `fk_stu_tr_1` FOREIGN KEY (`scholar`) REFERENCES `student` (`scholar`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_stu_tr_2` FOREIGN KEY (`train_id`) REFERENCES `train` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,6 +118,7 @@ CREATE TABLE `stu_tr` (
 
 LOCK TABLES `stu_tr` WRITE;
 /*!40000 ALTER TABLE `stu_tr` DISABLE KEYS */;
+INSERT INTO `stu_tr` VALUES (8,'1',32769),(9,'20141222171',32769);
 /*!40000 ALTER TABLE `stu_tr` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,6 +174,7 @@ CREATE TABLE `train` (
 
 LOCK TABLES `train` WRITE;
 /*!40000 ALTER TABLE `train` DISABLE KEYS */;
+INSERT INTO `train` VALUES (32769,'test','2018-04-17 00:00:00','2018-04-17 00:00:00','1001');
 /*!40000 ALTER TABLE `train` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -162,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-16 20:58:19
+-- Dump completed on 2018-04-17 21:03:47
