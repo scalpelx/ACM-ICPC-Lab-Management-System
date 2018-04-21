@@ -31,6 +31,11 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
+    public Train getTrainById(int id) {
+        return trainDao.getTrain(id);
+    }
+
+    @Override
     public List getTrains() {
         return this.trainDao.getTrains();
     }

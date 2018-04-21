@@ -5,17 +5,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class getACProlems {
-    public List<String> getACProbles(String url) {
-        List<String> result = new ArrayList<String>();
+public class Problems {
+    public Set<String> getACProblems(String userName) {
+        Set<String> result = new HashSet<String>();
         Document doc = null;
         try {
-            url = "http://acm.hdu.edu.cn/userstatus.php?user=Flycode";
+            String url = "http://acm.hdu.edu.cn/userstatus.php?user=" + userName;
             doc = Jsoup.connect(url).get();
         } catch (IOException e) {
             e.printStackTrace();

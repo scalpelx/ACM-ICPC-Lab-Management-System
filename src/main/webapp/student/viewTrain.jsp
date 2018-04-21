@@ -1,18 +1,22 @@
-<%@ page import="entity.Student" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="entity.Student" %>
+<%@ page import="entity.Attendance" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="entity.Train" %>
+<%@ page import="java.util.Set" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
     <title>济南大学ACM实验室管理系统</title>
-    <meta name="keywords"  content="设置关键词..." />
-    <meta name="description" content="设置描述..." />
-    <meta name="author" content="Scalpel" />
+    <meta name="keywords" content="设置关键词..."/>
+    <meta name="description" content="设置描述..."/>
+    <meta name="author" content="Scalpel"/>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <script src="/javascript/jquery.js"></script>
     <script src="/javascript/plug-ins/customScrollbar.min.js"></script>
     <script src="/javascript/plug-ins/echarts.min.js"></script>
@@ -47,7 +51,7 @@
                             <i class="icon-table"></i>信息管理<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="/student/viewInfo.jsp">查看个人信息</a>
+                            <a href="/studentView">查看个人信息</a>
                         </dd>
                         <dd>
                             <a href="/student/modifyInfo.jsp">修改个人信息</a>
@@ -96,6 +100,10 @@
         </nav>
         <footer class="side-footer">© 济南大学ACM实验室 版权所有</footer>
     </div>
+    <%
+        Student student = (Student) session.getAttribute("student");
+        Train train = (Train) session.getAttribute("train");
+    %>
     <div class="content-wrap">
         <header class="top-hd">
             <div class="hd-lt">
@@ -104,7 +112,8 @@
             <div class="hd-rt">
                 <ul>
                     <li>
-                        <a><i class="icon-user"></i>用户:<em><%= ((Student)session.getAttribute("student")).getName() %></em></a>
+                        <a><i class="icon-user"></i>用户:<em><%= student.getName() %>
+                        </em></a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" id="JsSignOut"><i class="icon-signout"></i>退出</a>
@@ -113,31 +122,51 @@
             </div>
         </header>
         <main class="main-cont content mCustomScrollbar">
-            <!--开始::内容-->
-            ${error}
             <div class="page-wrap">
+                <!--开始::内容-->
                 <section class="page-hd">
                     <header>
-                        <h2 class="title"><i class="icon-home"></i>济南大学ACM实验室管理系统</h2>
+                        <h2 class="title"><%= train.getName()  %></h2>
                     </header>
                     <hr>
                 </section>
-                <div id="container"></div>
-                <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-                <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-                <script>
-                    var gitment = new Gitment({
-                        id: 'location.href',
-                        owner: 'scalpelx',
-                        repo: 'scalpelx.github.io',
-                        oauth: {
-                            client_id: 'd77275971a5997e96cee',
-                            client_secret: 'a84c23c9b95e1ee1404aa74d2101008cdb056ea0',
-                        },
-                    })
-                    gitment.render('container')
-                </script>
+
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>已完成</th>
+                        <th>未完成</th>
+                    </tr>
+                    </thead>
+                    <tr class="cen">
+                        <td><%= train.getBeginDate() %></td>
+                        <td><%= train.getEndDate() %></td>
+                        <td>
+                            <%
+                                Set<String> done = (Set<String>) session.getAttribute("done");
+                                for (String p : done) {
+                            %>
+                            <a href="http://acm.hdu.edu.cn/showproblem.php?pid=<%=p%>"><%=p%></a>
+                            <%
+                                }
+                            %>
+                        </td>
+                        <td>
+                            <%
+                                Set<String> none = (Set<String>) session.getAttribute("none");
+                                for (String p : none) {
+                            %>
+                            <a href="http://acm.hdu.edu.cn/showproblem.php?pid=<%=p%>"><%=p%></a>
+                            <%
+                                }
+                            %>
+                        </td>
+                    </tr>
+                </table>
                 <!--开始::结束-->
+            </div>
         </main>
         <footer class="btm-ft">
             <p class="clear">

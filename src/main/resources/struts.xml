@@ -26,10 +26,10 @@
             <result name="error" type="redirect">/student/modifyPassword.jsp</result>
             <result name="input" type="redirect">/student/modifyPassword.jsp</result>
         </action>
-        <action name="studentView" class="studentAction" method="view">
+        <!-- action name="studentView" class="studentAction" method="view">
             <result name="success" type="redirect">/student/viewInfo.jsp</result>
             <result name="error" type="redirect">/student/main.jsp</result>
-        </action>
+        </action -->
         <action name="viewAllStudents" class="studentAction" method="viewAllStudents">
             <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
             <result name="error" type="redirect">/admin/admin.jsp</result>
@@ -99,8 +99,12 @@
             <result name="error" type="redirect">/admin/admin.jsp</result>
         </action>
         <action name="modifyTrain" class="trainAction" method="modifyTrain">
-            <result name="success" type="redirect">/admin/modifyTrain.jsp</result>
+            <result name="success" type="redirect">/admin/listTrains.jsp</result>
             <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
+        <action name="viewStudentTrain" class="trainAction" method="viewStudentTrain">
+            <result name="success" type="redirect">/student/viewTrain.jsp</result>
+            <result name="error" type="redirect">/student/listMyTrains.jsp</result>
         </action>
     </package>
 </struts>

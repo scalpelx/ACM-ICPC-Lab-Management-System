@@ -120,7 +120,7 @@ public class StudentAction extends ActionSupport{
             return ERROR;
         }
     }
-
+/*
     public String view() {
         Map session = ActionContext.getContext().getSession();
         Student student = (Student) session.get("student");
@@ -133,7 +133,7 @@ public class StudentAction extends ActionSupport{
             return ERROR;
         }
     }
-
+*/
     public String viewAllStudents() {
         Map session = ActionContext.getContext().getSession();
         List students = studentService.getAllStudent();

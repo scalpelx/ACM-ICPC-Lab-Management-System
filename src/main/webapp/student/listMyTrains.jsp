@@ -50,7 +50,7 @@
                             <i class="icon-table"></i>信息管理<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="/studentView">查看个人信息</a>
+                            <a href="/student/viewInfo.jsp">查看个人信息</a>
                         </dd>
                         <dd>
                             <a href="/student/modifyInfo.jsp">修改个人信息</a>
@@ -146,7 +146,7 @@
                         <td><%= train.getName()%></td>
                         <td><%= new SimpleDateFormat("yyyy-MM-dd hh:mm").format(train.getBeginDate()) %></td>
                         <td><%= new SimpleDateFormat("yyyy-MM-dd hh:mm").format(train.getEndDate()) %></td>
-                        <td></td>
+                        <td><a href="viewStudentTrain?id=<%=train.getId()%>">查看</a></td>
                     </tr>
                     <% } %>
                 </table>

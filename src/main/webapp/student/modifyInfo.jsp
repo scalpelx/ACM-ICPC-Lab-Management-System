@@ -47,7 +47,7 @@
                             <i class="icon-table"></i>信息管理<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="/studentView">查看个人信息</a>
+                            <a href="/student/viewInfo.jsp">查看个人信息</a>
                         </dd>
                         <dd>
                             <a href="/student/modifyInfo.jsp">修改个人信息</a>
