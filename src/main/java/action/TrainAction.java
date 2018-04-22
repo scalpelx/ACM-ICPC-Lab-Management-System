@@ -108,7 +108,7 @@ public class TrainAction extends ActionSupport {
         Set<String> problemSet = new HashSet<String>();
         for (String i : s)
             if (!i.isEmpty()) {
-                System.out.println(i);
+                //System.out.println(i);
                 problemSet.add(i);
             }
         Map session = ActionContext.getContext().getSession();
@@ -119,13 +119,37 @@ public class TrainAction extends ActionSupport {
 
         Set<String> done = Sets.intersection(problemSet, acProblem);
         session.put("done", done);
-        for (String i : done)
-            System.out.println(i);
-        //差集
         Set<String> none = Sets.difference(problemSet, acProblem);
         session.put("none", none);
-        for (String i : none)
-            System.out.println(i);
+        return SUCCESS;
+    }
+
+    public String listTrainDetail() {
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        String id = request.getParameter("id");
+        Train train = trainService.getTrainById(Integer.parseInt(id));
+        String problems = train.getProblems();
+        String s[] = problems.split(" ");
+        Set<String> problemSet = new HashSet<String>();
+        for (String i : s)
+            if (!i.isEmpty()) {
+                //System.out.println(i);
+                problemSet.add(i);
+            }
+        Map session = ActionContext.getContext().getSession();
+        session.put("train", train);
+        List<Student> students = train.getStudents();
+        session.put("students", students);
+        List<Set<String>> dones = new ArrayList<>();
+        List<Set<String>> nones = new ArrayList<>();
+        for (Student student : students) {
+            Problems p = new Problems();
+            Set<String> acProblem = p.getACProblems(student.getHdu());
+            dones.add(Sets.intersection(problemSet, acProblem));
+            nones.add(Sets.difference(problemSet, acProblem));
+        }
+        session.put("dones", dones);
+        session.put("nones", nones);
         return SUCCESS;
     }
 }

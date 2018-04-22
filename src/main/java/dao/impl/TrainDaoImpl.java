@@ -46,6 +46,12 @@ public class TrainDaoImpl implements TrainDao {
     }
 
     @Override
+    public List getStudents(int id) {
+        Train train = (Train) sessionFactory.getCurrentSession().get(Train.class, id);
+        return train.getStudents();
+    }
+
+    @Override
     public List getTrains() {
         return sessionFactory.getCurrentSession().createQuery("FROM Train").list();
     }

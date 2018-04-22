@@ -26,7 +26,7 @@ public class Problems {
         Matcher matcher = patten.matcher(problems);
         while(matcher.find()) {
             String problem = matcher.group(1);
-            System.out.println(problem);
+            //System.out.println(problem);
             result.add(problem);
         }
         return result;

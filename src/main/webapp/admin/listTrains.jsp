@@ -143,6 +143,7 @@
                         <td>
                             <a href="deleteTrain?id=<%= train.getId() %>">删除</a>
                             <a href="/admin/modifyTrain.jsp?id=<%= train.getId() %>">修改</a>
+                            <a href="listTrainDetail?id=<%= train.getId() %>">查看</a>
                         </td>
                     </tr>
                     <% } %>

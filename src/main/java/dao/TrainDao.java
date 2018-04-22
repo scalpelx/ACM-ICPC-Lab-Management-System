@@ -10,6 +10,7 @@ public interface TrainDao {
     public boolean delete(String id);
     public boolean update(Train train);
     public Train getTrain(int id);
+    public List getStudents(int id);
     public List getTrains();
     public List getStudentTrains(Student student);
 }

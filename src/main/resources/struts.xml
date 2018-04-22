@@ -106,5 +106,9 @@
             <result name="success" type="redirect">/student/viewTrain.jsp</result>
             <result name="error" type="redirect">/student/listMyTrains.jsp</result>
         </action>
+        <action name="listTrainDetail" class="trainAction" method="listTrainDetail">
+            <result name="success" type="redirect">/admin/viewStudentsTrain.jsp</result>
+            <result name="error" type="redirect">/admin/listTrains.jsp</result>
+        </action>
     </package>
 </struts>
