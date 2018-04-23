@@ -134,7 +134,7 @@
                     <div class="form-group-col-2">
                         <div class="form-label">新密码：</div>
                         <div class="form-cont">
-                            <input type="password" name="student.passwd" placeholder="请输入新密码" class="form-control form-boxed" style="width:300px;" />
+                            <input type="password" name="student.passwd" placeholder="请输入新密码" class="form-control form-boxed" style="width:400px;" />
                         </div>
                         ${errors.passwd[0]}
                     </div>
