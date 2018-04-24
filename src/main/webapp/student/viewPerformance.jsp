@@ -2,8 +2,6 @@
 <%@ page import="entity.Student" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="entity.Train" %>
-<%@ page import="java.util.Set" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,10 +96,7 @@
         </nav>
         <footer class="side-footer">© 济南大学ACM实验室 版权所有</footer>
     </div>
-    <%
-        Student student = (Student) session.getAttribute("student");
-        Train train = (Train) session.getAttribute("train");
-    %>
+    <% Student student = (Student) session.getAttribute("student"); %>
     <div class="content-wrap">
         <header class="top-hd">
             <div class="hd-lt">
@@ -124,43 +119,33 @@
                 <!--开始::内容-->
                 <section class="page-hd">
                     <header>
-                        <h2 class="title"><%= train.getName()  %></h2>
+                        <h2 class="title">我的个人信息</h2>
                     </header>
                     <hr>
                 </section>
-
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>剩余时间</th>
-                        <th>已完成</th>
-                        <th>未完成</th>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>班级</th>
+                        <th>性别</th>
+                        <th>手机号</th>
+                        <th>杭电账号</th>
                     </tr>
                     </thead>
                     <tr class="cen">
-                        <%
-                            long remainMillis = new Date(train.getEndDate().getTime()).getTime() - new Date().getTime();
-                        %>
-                        <td><%= remainMillis > 0 ? String.format("%02d:%02d:%02d", remainMillis / 3600000 % 24, remainMillis / 60000  % 60, remainMillis / 1000 % 60) : "已结束" %></td>
-                        <td>
-                            <%
-                                Set<String> done = (Set<String>) session.getAttribute("done");
-                                for (String p : done) {
-                            %>
-                            <a href="http://acm.hdu.edu.cn/showproblem.php?pid=<%=p%>"><%=p%></a>
-                            <%
-                                }
-                            %>
+                        <td><%= student.getScholar() %>
                         </td>
-                        <td>
-                            <%
-                                Set<String> none = (Set<String>) session.getAttribute("none");
-                                for (String p : none) {
-                            %>
-                            <a href="http://acm.hdu.edu.cn/showproblem.php?pid=<%=p%>"><%=p%></a>
-                            <%
-                                }
-                            %>
+                        <td><%= student.getName() %>
+                        </td>
+                        <td><%= student.getStdclass() %>
+                        </td>
+                        <td><%= student.getSex() == 0 ? "男" : "女" %>
+                        </td>
+                        <td><%= student.getPhone() %>
+                        </td>
+                        <td><%= student.getHdu() %>
                         </td>
                     </tr>
                 </table>

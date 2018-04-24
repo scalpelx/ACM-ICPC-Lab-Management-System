@@ -2,14 +2,17 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import entity.Attendance;
 import entity.Student;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import service.AttendanceService;
 import service.StudentService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +21,9 @@ import java.util.Map;
 public class StudentAction extends ActionSupport{
     @Resource
     private StudentService studentService;
+
+    @Resource
+    private AttendanceService attendanceService;
 
     private Student student;
 
@@ -157,5 +163,24 @@ public class StudentAction extends ActionSupport{
             session.put("error", "删除失败");
             return ERROR;
         }
+    }
+
+    public String viewPerformance() {
+        Map session = ActionContext.getContext().getSession();
+        Student student = (Student) session.get("student");
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH ) + 1;
+        String startDate = null, endDate = null;
+        if (month > 8) {
+            startDate = String.valueOf(year) + "-09-01";
+            endDate = String.valueOf(year + 1) + "-08-31";
+        } else {
+            startDate = String.valueOf(year - 1) + "-09-01";
+            endDate = String.valueOf(year) + "-08-31";
+        }
+        List<Attendance> attendances = attendanceService.getAttendancesByStudentAndDate(student.getScholar(), startDate, endDate);
+        return SUCCESS;
     }
 }
