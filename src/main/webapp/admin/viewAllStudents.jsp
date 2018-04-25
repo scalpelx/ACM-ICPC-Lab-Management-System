@@ -150,8 +150,9 @@
                             <a href="/admin/modifyStudent.jsp?scholar=<%= student.getScholar() %>" class="mr-5" title="修改信息">修改</a>
                             <a href="/deleteStudent?scholar=<%= student.getScholar() %>" class="mr-5" title="删除">删除</a>
                             <a href="/listStudentAttendances?scholar=<%=student.getScholar()%>&startDate=<%=firstDate%>&endDate=<%=lastDate%>" class="mr-5" title="查看考勤">
-                                考勤
+                                查看考勤
                             </a>
+                            <a href="/viewStudentPerformance?scholar=<%= student.getScholar() %>" class="mr-5" title="查看表现">查看表现</a>
                             <a href="" class="mr-5" title="评价">评价</a>
                         </td>
                     </tr>

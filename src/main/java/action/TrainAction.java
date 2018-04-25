@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import service.StudentService;
 import service.TrainService;
-import sun.security.krb5.SCDynamicStoreConfig;
 import util.Problems;
 
 import javax.annotation.Resource;
@@ -105,7 +104,7 @@ public class TrainAction extends ActionSupport {
         Train train = trainService.getTrainById(Integer.parseInt(id));
         String problems = train.getProblems();
         String s[] = problems.split(" ");
-        Set<String> problemSet = new HashSet<String>();
+        Set<String> problemSet = new TreeSet();
         for (String i : s)
             if (!i.isEmpty()) {
                 //System.out.println(i);

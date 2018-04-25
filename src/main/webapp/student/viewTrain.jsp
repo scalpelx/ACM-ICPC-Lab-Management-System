@@ -87,7 +87,7 @@
                             <i class="icon-columns"></i>统计及评价<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="">日常表现统计</a>
+                            <a href="/viewPerformance">日常表现统计</a>
                         </dd>
                         <dd>
                             <a href="">我的评价</a>

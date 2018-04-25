@@ -5,14 +5,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Problems {
     public Set<String> getACProblems(String userName) {
-        Set<String> result = new HashSet<String>();
+        Set<String> result = new TreeSet();
         Document doc = null;
         try {
             String url = "http://acm.hdu.edu.cn/userstatus.php?user=" + userName;

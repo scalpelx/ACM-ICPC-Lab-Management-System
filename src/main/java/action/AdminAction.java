@@ -3,18 +3,34 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.Admin;
+import entity.Attendance;
+import entity.Student;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import service.AdminService;
+import service.AttendanceService;
+import service.StudentService;
+import util.Problems;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller("adminAction")
 @Scope("prototype")
 public class AdminAction extends ActionSupport {
     @Resource
     private AdminService adminService;
+
+    @Resource
+    private StudentService studentService;
+
+    @Resource
+    private AttendanceService attendanceService;
 
     private Admin admin;
 
@@ -79,5 +95,38 @@ public class AdminAction extends ActionSupport {
         } else {
             return ERROR;
         }
+    }
+
+    public String viewStudentPerformance() {
+        Map session = ActionContext.getContext().getSession();
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        String scholar = request.getParameter("scholar");
+        Student student = studentService.getStudentByScholar(scholar);
+        Problems p = new Problems();
+        Set<String> acProblem = p.getACProblems(student.getHdu());
+        session.put("ac", acProblem);
+        session.put("studentName", student.getName());
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH ) + 1;
+        String startDate = null, endDate = null;
+        if (month > 8) {
+            startDate = String.valueOf(year) + "-09-01";
+            endDate = String.valueOf(year + 1) + "-08-31";
+        } else {
+            startDate = String.valueOf(year - 1) + "-09-01";
+            endDate = String.valueOf(year) + "-08-31";
+        }
+        List<Attendance> attendances = attendanceService.getAttendancesByStudentAndDate(student.getScholar(), startDate, endDate);
+        int days = attendances.size();
+        double totalTime = 0;
+        for (Attendance attendance : attendances) {
+            totalTime += attendance.getLeaveTime().getTime() - attendance.getArriveTime().getTime();
+        }
+        totalTime /= days;
+        session.put("days", days);
+        session.put("averageTime", String.format("%02d:%02d:%02d", (int) totalTime / 3600000 % 24, (int) totalTime / 60000  % 60, (int) totalTime / 1000 % 60));
+        return SUCCESS;
     }
 }

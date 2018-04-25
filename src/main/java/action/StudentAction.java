@@ -9,12 +9,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import service.AttendanceService;
 import service.StudentService;
+import util.Problems;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller("studentAction")
 @Scope("prototype")
@@ -168,6 +170,9 @@ public class StudentAction extends ActionSupport{
     public String viewPerformance() {
         Map session = ActionContext.getContext().getSession();
         Student student = (Student) session.get("student");
+        Problems p = new Problems();
+        Set<String> acProblem = p.getACProblems(student.getHdu());
+        session.put("ac", acProblem);
 
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -181,6 +186,14 @@ public class StudentAction extends ActionSupport{
             endDate = String.valueOf(year) + "-08-31";
         }
         List<Attendance> attendances = attendanceService.getAttendancesByStudentAndDate(student.getScholar(), startDate, endDate);
+        int days = attendances.size();
+        double totalTime = 0;
+        for (Attendance attendance : attendances) {
+            totalTime += attendance.getLeaveTime().getTime() - attendance.getArriveTime().getTime();
+        }
+        totalTime /= days;
+        session.put("days", days);
+        session.put("averageTime", String.format("%02d:%02d:%02d", (int) totalTime / 3600000 % 24, (int) totalTime / 60000  % 60, (int) totalTime / 1000 % 60));
         return SUCCESS;
     }
 }

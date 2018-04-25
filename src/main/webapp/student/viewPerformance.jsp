@@ -2,6 +2,7 @@
 <%@ page import="entity.Student" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="java.util.Set" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +86,7 @@
                             <i class="icon-columns"></i>统计及评价<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="">日常表现统计</a>
+                            <a href="/viewPerformance">日常表现统计</a>
                         </dd>
                         <dd>
                             <a href="">我的评价</a>
@@ -96,7 +97,12 @@
         </nav>
         <footer class="side-footer">© 济南大学ACM实验室 版权所有</footer>
     </div>
-    <% Student student = (Student) session.getAttribute("student"); %>
+    <%
+        Student student = (Student) session.getAttribute("student");
+        Set<String> ac = (Set<String>) session.getAttribute("ac");
+        int days = (int) session.getAttribute("days");
+        String average = (String) session.getAttribute("averageTime");
+    %>
     <div class="content-wrap">
         <header class="top-hd">
             <div class="hd-lt">
@@ -119,33 +125,30 @@
                 <!--开始::内容-->
                 <section class="page-hd">
                     <header>
-                        <h2 class="title">我的个人信息</h2>
+                        <h2 class="title">我的个人表现</h2>
                     </header>
                     <hr>
                 </section>
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>学号</th>
-                        <th>姓名</th>
-                        <th>班级</th>
-                        <th>性别</th>
-                        <th>手机号</th>
-                        <th>杭电账号</th>
+                        <th width="120px">学年出勤天数</th>
+                        <th width="120px">平均出勤时间</th>
+                        <th width="70px">刷题数</th>
+                        <th>AC题号</th>
                     </tr>
                     </thead>
                     <tr class="cen">
-                        <td><%= student.getScholar() %>
+                        <td><%= days %>
                         </td>
-                        <td><%= student.getName() %>
+                        <td><%= average %>
                         </td>
-                        <td><%= student.getStdclass() %>
+                        <td><%= ac.size() %>
                         </td>
-                        <td><%= student.getSex() == 0 ? "男" : "女" %>
-                        </td>
-                        <td><%= student.getPhone() %>
-                        </td>
-                        <td><%= student.getHdu() %>
+                        <td>
+                            <% for (String p : ac) { %>
+                                <a href="http://acm.hdu.edu.cn/showproblem.php?pid=<%= p %>"><%= p %></a>
+                            <% } %>
                         </td>
                     </tr>
                 </table>

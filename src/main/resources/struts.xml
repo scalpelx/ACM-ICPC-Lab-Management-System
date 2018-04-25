@@ -110,5 +110,13 @@
             <result name="success" type="redirect">/admin/viewStudentsTrain.jsp</result>
             <result name="error" type="redirect">/admin/listTrains.jsp</result>
         </action>
+        <action name="viewPerformance" class="studentAction" method="viewPerformance">
+            <result name="success" type="redirect">/student/viewPerformance.jsp</result>
+            <result name="error" type="redirect">/student/main.jsp</result>
+        </action>
+        <action name="viewStudentPerformance" class="adminAction" method="viewStudentPerformance">
+            <result name="success" type="redirect">/admin/viewStudentPerformance.jsp</result>
+            <result name="error" type="redirect">/admin/viewAllStudents.jsp</result>
+        </action>
     </package>
 </struts>
