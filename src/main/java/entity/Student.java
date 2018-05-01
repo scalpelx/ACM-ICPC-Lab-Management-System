@@ -15,6 +15,7 @@ public class Student {
     private int sex;
     private String hdu;
     private List<Train> trains;
+    private Collection<Evaluation> evaluationsByScholar;
 
     @Id
     @Column(name = "scholar", nullable = false, length = 15)
@@ -123,5 +124,14 @@ public class Student {
 
     public void setTrains(List<Train> trains) {
         this.trains = trains;
+    }
+
+    @OneToMany(mappedBy = "studentByScholar")
+    public Collection<Evaluation> getEvaluationsByScholar() {
+        return evaluationsByScholar;
+    }
+
+    public void setEvaluationsByScholar(Collection<Evaluation> evaluationsByScholar) {
+        this.evaluationsByScholar = evaluationsByScholar;
     }
 }

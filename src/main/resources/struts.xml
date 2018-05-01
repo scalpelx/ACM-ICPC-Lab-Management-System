@@ -118,5 +118,13 @@
             <result name="success" type="redirect">/admin/viewStudentPerformance.jsp</result>
             <result name="error" type="redirect">/admin/viewAllStudents.jsp</result>
         </action>
+        <action name="addEvaluation" class="evaluationAction" method="addEvaluation">
+            <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
+            <result name="error" type="redirect">/admin/evaluation.jsp</result>
+        </action>
+        <action name="listEvaluation" class="evaluationAction" method="listEvaluation">
+            <result name="success" type="redirect">/admin/evaluation.jsp</result>
+            <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
     </package>
 </struts>
