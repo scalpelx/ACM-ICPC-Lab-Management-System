@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="entity.Student" %>
-<%@ page import="entity.Attendance" %>
-<%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="entity.Evaluation" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +48,7 @@
                             <i class="icon-table"></i>信息管理<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="/student/viewInfo.jspw">查看个人信息</a>
+                            <a href="/studentView">查看个人信息</a>
                         </dd>
                         <dd>
                             <a href="/student/modifyInfo.jsp">修改个人信息</a>
@@ -121,58 +120,17 @@
                 <!--开始::内容-->
                 <section class="page-hd">
                     <header>
-                        <h2 class="title"><%= student.getName()  %>考勤情况</h2>
+                        <h2 class="title">教练评价</h2>
                     </header>
                     <hr>
-                </section>
-                <form action="viewAttendances" method="post">
-                    <div class="form-group-col-2">
-                        <div class="form-label">选择查询区间</div>
-                        <div class="form-cont">
-                            <input type="date" class="form-control form-boxed" name="startDate" value=<%= session.getAttribute("startDate") %> style="width:200px;" required="">
-                            至
-                            <input type="date" class="form-control form-boxed" name="endDate" value=<%= session.getAttribute("endDate") %> style="width:200px;" required="">
-                            <input type="submit" class="btn btn-primary" value="提交" />
+                    <div class="panel panel-default">
+                        <div class="panel-bd capitalize">
+                            <% Evaluation evaluation = (Evaluation)session.getAttribute("evaluation"); %>
+                            <%= evaluation.getContent()%>
                         </div>
                     </div>
-                </form>
-                <table class="table table-bordered table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>日期</th>
-                        <th>签到时间</th>
-                        <th>签退时间</th>
-                        <th>出勤时间</th>
-                    </tr>
-                    </thead>
-                    <%
-                        List<Attendance> attendances = (List<Attendance>) session.getAttribute("attendances");
-                        int i = 0;
-                        double total = 0;
-                        for (Attendance attendance : attendances) {
-                    %>
-                    <tr class="cen">
-                        <td><%= ++i %></td>
-                        <td><%= attendance.getDate() %></td>
-                        <td><%= attendance.getArriveTime() %></td>
-                        <td><%= attendance.getLeaveTime() %></td>
-                        <%
-                            long millis = attendance.getLeaveTime().getTime() - attendance.getArriveTime().getTime();
-                            total += millis;
-                        %>
-                        <td><%= String.format("%02d:%02d:%02d", millis / 3600000 % 24, millis / 60000  % 60, millis / 1000 % 60) %></td>
-                    </tr>
-                    <%
-                        }
-                        total /= attendances.size();
-                    %>
-                </table>
-                <div class="panel panel-default">
-                    <div class="panel-bd capitalize">
-                        平均出勤时间<%= String.format("%02d:%02d:%02d", (int) total / 3600000 % 24, (int) total / 60000  % 60, (int) total / 1000 % 60) %>
-                    </div>
-                </div>
+                </section>
+
                 <!--开始::结束-->
             </div>
         </main>

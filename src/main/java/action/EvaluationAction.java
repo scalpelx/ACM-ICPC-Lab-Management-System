@@ -3,6 +3,7 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.Evaluation;
+import entity.Student;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import service.StudentService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -26,6 +28,8 @@ public class EvaluationAction extends ActionSupport {
 
     private Evaluation evaluation;
 
+    private String scholar;
+    private String date;
     private String content;
 
     public Evaluation getEvaluation() {
@@ -36,6 +40,22 @@ public class EvaluationAction extends ActionSupport {
         this.evaluation = evaluation;
     }
 
+    public String getScholar() {
+        return scholar;
+    }
+
+    public void setScholar(String scholar) {
+        this.scholar = scholar;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getContent() {
         return content;
     }
@@ -44,44 +64,56 @@ public class EvaluationAction extends ActionSupport {
         this.content = content;
     }
 
-    public String addEvaluation() {
-        evaluation.setContent(content);
+    public String addEvaluation() throws ParseException {
+        Student student =  studentService.getStudentByScholar(scholar);
+        java.util.Date d = new SimpleDateFormat("yyyy").parse(date);
+        evaluation.setDate(new java.sql.Date(d.getTime()));
+        evaluation.setStudentByScholar(student);
         if (evaluationService.addEvaluation(evaluation))
             return SUCCESS;
         else
             return ERROR;
     }
 
-    public String deleteEvaluation() {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int id = Integer.parseInt(request.getParameter("id"));
-        if (evaluationService.deleteEvaluation(evaluation))
-            return SUCCESS;
-        else
-            return ERROR;
-    }
-
     public String modifyEvaluation() {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int id = Integer.parseInt(request.getParameter("id"));
-        if (evaluationService.updateEvaluation(evaluation))
+        Map session = ActionContext.getContext().getSession();
+        evaluation = (Evaluation) session.get("evaluation");
+        evaluation.setContent(content);
+        if (evaluationService.updateEvaluation(evaluation)) {
+            session.put("evaluation", evaluation);
             return SUCCESS;
-        else
+        } else
             return ERROR;
     }
 
     public String listEvaluation() {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        String scholar = request.getParameter("scholar");
-        String data = new SimpleDateFormat("yyyy").format(new Date());
-        Evaluation evaluation =  evaluationService.getEvaluation(scholar, data);
-        if (evaluation == null) {
-            evaluation.setStudentByScholar(studentService.getStudentByScholar(scholar));
-            evaluation.setDate(new java.sql.Date(new Date().getTime()));
-        }
         Map session = ActionContext.getContext().getSession();
-        session.put("evaluation", evaluation);
-        return SUCCESS;
+        Student student =  (Student)session.get("student");
+        String data = new SimpleDateFormat("yyyy").format(new Date()) + "-01-01";
+        System.out.println(student.getScholar() + " " + data);
+        Evaluation evaluation =  evaluationService.getEvaluation(student.getScholar(), data);
+        if (evaluation == null) {
+            return ERROR;
+        } else {
+            session.put("evaluation", evaluation);
+            return SUCCESS;
+        }
     }
 
+    public String preEvaluation() {
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        String scholar = request.getParameter("scholar");
+        String date = new SimpleDateFormat("yyyy").format(new Date()) + "-01-01";
+        System.out.println(scholar + " " + date);
+        Evaluation evaluation =  evaluationService.getEvaluation(scholar, date);
+        Map session = ActionContext.getContext().getSession();
+        if (evaluation == null) {
+            session.put("scholar", scholar);
+            return "addEvaluation";
+        } else {
+            System.out.println(evaluation.getStudentByScholar().getName());
+            session.put("evaluation", evaluation);
+            return "listEvaluation";
+        }
+    }
 }

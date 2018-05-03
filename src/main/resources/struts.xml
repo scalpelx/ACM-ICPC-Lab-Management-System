@@ -120,11 +120,19 @@
         </action>
         <action name="addEvaluation" class="evaluationAction" method="addEvaluation">
             <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
-            <result name="error" type="redirect">/admin/evaluation.jsp</result>
+            <result name="error" type="redirect">/admin/addEvaluation.jsp</result>
         </action>
-        <action name="listEvaluation" class="evaluationAction" method="listEvaluation">
-            <result name="success" type="redirect">/admin/evaluation.jsp</result>
+        <action name="modifyEvaluation" class="evaluationAction" method="modifyEvaluation">
+            <result name="success" type="redirect">/admin/viewEvaluation.jsp</result>
             <result name="error" type="redirect">/admin/admin.jsp</result>
+        </action>
+        <action name="preEvaluation" class="evaluationAction" method="preEvaluation">
+            <result name="addEvaluation" type="redirect">/admin/addEvaluation.jsp</result>
+            <result name="listEvaluation" type="redirect">/admin/viewEvaluation.jsp</result>
+        </action>
+        <action name="viewEvaluation" class="evaluationAction" method="listEvaluation">
+            <result name="success" type="redirect">/student/viewEvaluation.jsp</result>
+            <result name="error" type="redirect">/student/main.jsp</result>
         </action>
     </package>
 </struts>

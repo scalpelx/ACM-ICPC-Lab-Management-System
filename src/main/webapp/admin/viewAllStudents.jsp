@@ -153,7 +153,7 @@
                                 查看考勤
                             </a>
                             <a href="/viewStudentPerformance?scholar=<%= student.getScholar() %>" class="mr-5" title="查看表现">查看表现</a>
-                            <a href="/listEvaluation?scholar=<%= student.getScholar() %>" class="mr-5" title="评价">评价</a>
+                            <a href="/preEvaluation?scholar=<%= student.getScholar() %>" class="mr-5" title="评价">评价</a>
                         </td>
                     </tr>
                     <% } %>

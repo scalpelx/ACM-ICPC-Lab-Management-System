@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.sql.Date;
 import java.util.Iterator;
+import java.util.List;
 
 @Transactional(rollbackFor = Exception.class)
 //出现Exception异常回滚
@@ -52,9 +52,10 @@ public class EvaluationDaoImpl implements EvaluationDao {
         Query query = sessionFactory.getCurrentSession().createQuery(hsql);
         query.setString(0, scholar);
         query.setString(1, date);
-        Iterator<Evaluation> it = query.iterate();
-        if (it.hasNext()) {
-            return it.next();
+        List<Evaluation> evaluations = query.list();
+        if (!evaluations.isEmpty()) {
+            System.out.println("find evaluation");
+            return evaluations.get(0);
         } else
             return null;
     }

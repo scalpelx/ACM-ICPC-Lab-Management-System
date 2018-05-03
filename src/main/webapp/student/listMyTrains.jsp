@@ -91,7 +91,7 @@
                             <a href="/viewPerformance">日常表现统计</a>
                         </dd>
                         <dd>
-                            <a href="">我的评价</a>
+                            <a href="/viewEvaluation">我的评价</a>
                         </dd>
                     </dl>
                 </li>

@@ -11,9 +11,9 @@ public class Evaluation {
     private Date date;
     private String content;
     private Student studentByScholar;
-    private String selfEva;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.TABLE)
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -69,13 +69,4 @@ public class Evaluation {
         this.studentByScholar = studentByScholar;
     }
 
-    @Basic
-    @Column(name = "self_eva", nullable = true, length = 65535)
-    public String getSelfEva() {
-        return selfEva;
-    }
-
-    public void setSelfEva(String selfEva) {
-        this.selfEva = selfEva;
-    }
 }

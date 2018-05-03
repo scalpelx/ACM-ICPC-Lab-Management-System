@@ -83,10 +83,10 @@
                             <i class="icon-inbox"></i>训练计划<i class="icon-angle-right"></i>
                         </dt>
                         <dd>
-                            <a href="">分配训练计划</a>
+                            <a href="trainPre">分配训练计划</a>
                         </dd>
                         <dd>
-                            <a href="">查看完成情况</a>
+                            <a href="/listTrains">查看完成情况</a>
                         </dd>
                     </dl>
                 </li>
@@ -114,30 +114,25 @@
         <main class="main-cont content mCustomScrollbar">
             <!--开始::内容-->
             <div class="page-wrap">
+                <% Evaluation evaluation = (Evaluation)session.getAttribute("evaluation"); %>
                 <section class="page-hd">
                     <header>
-                        <h2 class="title">评价成员</h2>
+                        <h2 class="title">评价成员<%= evaluation.getStudentByScholar().getName()%></h2>
                     </header>
                     <hr>
                 </section>
-                <form action="addEvaluation" method="post">
-                    <% Evaluation evaluation = (Evaluation)session.getAttribute("evaluation"); %>
-                    <div class="form-group-col-2">
-                        <div class="form-label"><%= evaluation.getStudentByScholar().getName()%>的自我评价：</div>
-                        <div class="form-cont">
-                            <%= evaluation.getSelfEva() %>
-                        </div>
-                    </div>
+                <form action="modifyEvaluation" method="post">
                     <div class="form-group-col-2">
                         <div class="form-label">评价：</div>
                         <div class="form-cont">
-                            <input type="text" class="form-control form-boxed" name="evaluation.content" style="width:400px;" required="">
+                            <textarea class="form-control form-boxed" name="content" style="width:500px;"
+                                      required="" rows="6"><%= evaluation.getContent()%></textarea>
                         </div>
                     </div>
                     <div class="form-group-col-2">
                         <div class="form-label"></div>
                         <div class="form-cont">
-                            <input type="submit" class="btn btn-primary" value="提交" />
+                            <input type="submit" class="btn btn-primary" value="修改" />
                             <input type="reset" class="btn btn-primary" value="重置" />
                         </div>
                     </div>

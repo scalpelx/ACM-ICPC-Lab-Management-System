@@ -59,7 +59,6 @@ CREATE TABLE `evaluation` (
   `scholar` varchar(15) collate utf8_bin NOT NULL COMMENT '学生学号',
   `date` year(4) NOT NULL COMMENT '评价年份',
   `content` text collate utf8_bin COMMENT '内容',
-  `self_eva` text collate utf8_bin COMMENT '自评',
   PRIMARY KEY  (`id`),
   KEY `FK_evaluation` (`scholar`),
   CONSTRAINT `FK_evaluation` FOREIGN KEY (`scholar`) REFERENCES `student` (`scholar`)
