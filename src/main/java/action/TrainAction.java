@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import service.StudentService;
 import service.TrainService;
 import util.Problems;
+import util.SendMessage;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.*;
 
 @Controller("trainAction")
@@ -42,12 +44,15 @@ public class TrainAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String addTrain() {
+    public String addTrain() throws IOException {
         List<Student> students = new ArrayList();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         String[] scholars = request.getParameterValues("scholars");
         for (String scholar : scholars) {
-            students.add(studentService.getStudentByScholar(scholar));
+            Student student = studentService.getStudentByScholar(scholar);
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.send(student.getPhone());
+            students.add(student);
         }
         train.setStudents(students);
         trainService.addTrain(train);
