@@ -117,7 +117,7 @@
             <% List<Attendance> attendances = (List<Attendance>) session.getAttribute("attendances"); %>
             <section class="page-hd">
                 <header>
-                    <h2 class="title"><%= attendances.get(0).getStudentByScholar().getName() %>考勤情况</h2>
+                    <h2 class="title">考勤情况</h2>
                 </header>
                 <hr>
             </section>
