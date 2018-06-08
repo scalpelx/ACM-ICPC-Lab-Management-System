@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.StudentDao;
 import entity.Student;
+import entity.Train;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -68,7 +69,13 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public void delete(String scholar) {
-        sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().get(Student.class, scholar));
+        Student student = (Student) sessionFactory.getCurrentSession().get(Student.class, scholar);
+        List<Train> trains =  student.getTrains();
+        for (Train train : trains) {
+            train.getStudents().remove(student);
+        }
+        student.setTrains(null);
+        sessionFactory.getCurrentSession().delete(student);
     }
 
     @Override
