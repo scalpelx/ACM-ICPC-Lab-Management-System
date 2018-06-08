@@ -6,6 +6,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "student")
+//@org.hibernate.annotations.Entity(dynamicUpdate=true, selectBeforeUpdate = true)
+
 public class Student {
     private String scholar;
     private String name;

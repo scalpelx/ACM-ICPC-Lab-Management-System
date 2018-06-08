@@ -16,6 +16,8 @@ import util.SendMessage;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller("trainAction")
@@ -29,12 +31,31 @@ public class TrainAction extends ActionSupport {
 
     private Train train;
 
+    private String beginDate;
+    private String endDate;
+
     public Train getTrain() {
         return train;
     }
 
     public void setTrain(Train train) {
         this.train = train;
+    }
+
+    public String getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public String pre() {
@@ -45,13 +66,17 @@ public class TrainAction extends ActionSupport {
     }
 
     public String addTrain() throws IOException {
+        Timestamp ts = Timestamp.valueOf(beginDate.replace("T"," "));
+        train.setBeginDate(ts);
+        ts = Timestamp.valueOf(endDate.replace("T"," "));
+        train.setEndDate(ts);
         List<Student> students = new ArrayList();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         String[] scholars = request.getParameterValues("scholars");
         for (String scholar : scholars) {
             Student student = studentService.getStudentByScholar(scholar);
             SendMessage sendMessage = new SendMessage();
-            sendMessage.send(student.getPhone());
+            //sendMessage.send(student.getPhone());
             students.add(student);
         }
         train.setStudents(students);
@@ -112,7 +137,6 @@ public class TrainAction extends ActionSupport {
         Set<String> problemSet = new TreeSet();
         for (String i : s)
             if (!i.isEmpty()) {
-                //System.out.println(i);
                 problemSet.add(i);
             }
         Map session = ActionContext.getContext().getSession();
@@ -137,7 +161,6 @@ public class TrainAction extends ActionSupport {
         Set<String> problemSet = new HashSet<String>();
         for (String i : s)
             if (!i.isEmpty()) {
-                //System.out.println(i);
                 problemSet.add(i);
             }
         Map session = ActionContext.getContext().getSession();

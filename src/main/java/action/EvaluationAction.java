@@ -93,6 +93,7 @@ public class EvaluationAction extends ActionSupport {
         System.out.println(student.getScholar() + " " + data);
         Evaluation evaluation =  evaluationService.getEvaluation(student.getScholar(), data);
         if (evaluation == null) {
+            session.put("error", "教练尚未作出评价");
             return ERROR;
         } else {
             session.put("evaluation", evaluation);

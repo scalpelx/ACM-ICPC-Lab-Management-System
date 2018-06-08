@@ -80,7 +80,7 @@ public class AdminAction extends ActionSupport {
             session.put("admin", admin);
             return SUCCESS;
         } else {
-            session.put("AdminModifyError", "修改失败！");
+            session.put("error", "修改失败！");
             return ERROR;
         }
     }
@@ -93,6 +93,8 @@ public class AdminAction extends ActionSupport {
             session.put("admin", admin);
             return SUCCESS;
         } else {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            request.setAttribute("error", "密码错误");
             return ERROR;
         }
     }

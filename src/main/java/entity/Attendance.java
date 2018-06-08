@@ -1,12 +1,13 @@
 package entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 
 @Entity
 @Table(name = "attendance")
-public class Attendance {
+public class Attendance implements Serializable {
     private Date date;
     private Time arriveTime;
     private Time leaveTime;
@@ -52,6 +53,7 @@ public class Attendance {
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
         if (arriveTime != null ? !arriveTime.equals(that.arriveTime) : that.arriveTime != null) return false;
         if (leaveTime != null ? !leaveTime.equals(that.leaveTime) : that.leaveTime != null) return false;
+        if (studentByScholar != null ? !studentByScholar.getScholar().equals(that.studentByScholar.getScholar()) : that.studentByScholar != null) return false;
 
         return true;
     }
@@ -61,9 +63,11 @@ public class Attendance {
         int result = date != null ? date.hashCode() : 0;
         result = 31 * result + (arriveTime != null ? arriveTime.hashCode() : 0);
         result = 31 * result + (leaveTime != null ? leaveTime.hashCode() : 0);
+        result = 31 * result + (studentByScholar != null ? studentByScholar.getScholar().hashCode() : 0);
         return result;
     }
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "scholar", referencedColumnName = "scholar", nullable = false)
 

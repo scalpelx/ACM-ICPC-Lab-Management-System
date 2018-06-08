@@ -93,23 +93,23 @@ public class StudentAction extends ActionSupport{
         }
     }
 
-    public void validateModifyInfo() {
-        System.out.println("validateModify");
-        if (student.getPasswd().isEmpty())
-            this.addFieldError("passwd", "请输入密码");
-        if (student.getStdclass().isEmpty())
-            this.addFieldError("stdclass", "请输入班级");
-        if (student.getPhone().isEmpty())
-            this.addFieldError("phone", "请输入手机号");
-        if (student.getHdu().isEmpty())
-            this.addFieldError("hdu", "请输入杭电OJ账号");
-        if (student.getName().isEmpty())
-            this.addFieldError("name", "请输入姓名");
-    }
-
     public String modifyInfo() {
         Map session = ActionContext.getContext().getSession();
+        Student stu = studentService.getStudentByScholar(student.getScholar());
+        if (student.getPasswd() == null || student.getPasswd().isEmpty())
+            student.setPasswd(stu.getPasswd());
+        if (student.getScholar().isEmpty())
+            student.setScholar(stu.getScholar());
+        if (student.getHdu().isEmpty())
+            student.setHdu(stu.getHdu());
+        if (student.getName().isEmpty())
+            student.setName(stu.getName());
+        if (student.getPhone().isEmpty())
+            student.setPhone(stu.getPhone());
+        if (student.getStdclass().isEmpty())
+            student.setStdclass(stu.getStdclass());
         if (studentService.updateStudent(student)) {
+            session.put("student", student);
             return SUCCESS;
         } else {
             session.put("modifyError", "修改失败！");
@@ -125,6 +125,8 @@ public class StudentAction extends ActionSupport{
             session.put("student", student);
             return SUCCESS;
         } else {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            request.setAttribute("error", "密码错误");
             return ERROR;
         }
     }

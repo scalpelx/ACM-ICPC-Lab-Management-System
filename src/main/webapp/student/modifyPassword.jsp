@@ -122,13 +122,13 @@
                     </header>
                     <hr>
                 </section>
-                ${modifyError}
                 <form action="studentModifyPassword" method="post">
                     <input type="hidden" name="student.scholar" value="<%= student.getScholar() %>" />
                     <div class="form-group-col-2">
                         <div class="form-label">旧密码：</div>
                         <div class="form-cont">
                             <input type="password" placeholder="请输入旧密码" class="form-control form-boxed" name="oldPassword" style="width:400px;">
+                            ${error}
                         </div>
                     </div>
                     <div class="form-group-col-2">
@@ -136,7 +136,6 @@
                         <div class="form-cont">
                             <input type="password" name="student.passwd" placeholder="请输入新密码" class="form-control form-boxed" style="width:400px;" />
                         </div>
-                        ${errors.passwd[0]}
                     </div>
                     <div class="form-group-col-2">
                         <div class="form-label"></div>

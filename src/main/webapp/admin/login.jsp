@@ -29,7 +29,7 @@
         </div>
     </form>
 </div>
-<h3 align="center" style="color: red">${adminLoginError}</h3>
+<h3 align="center" style="color: red">${AdminLoginError}</h3>
 <div class="footer-w3l">
     <p>Copyright © 2018 UJN ACM Lab. All Rights Reserved.</p>
 </div>

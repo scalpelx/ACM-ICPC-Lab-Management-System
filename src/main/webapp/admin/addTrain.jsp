@@ -131,13 +131,13 @@
                     <div class="form-group-col-2">
                         <div class="form-label">开始时间：</div>
                         <div class="form-cont">
-                            <input type="datetime-local" class="form-control form-boxed" name="train.beginDate" value=<%=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(new Date())%> style="width:400px;" required="">
+                            <input type="datetime-local" class="form-control form-boxed" name="beginDate" value=<%=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(new Date())%> style="width:400px;" required="">
                         </div>
                     </div>
                     <div class="form-group-col-2">
                         <div class="form-label">结束时间：</div>
                         <div class="form-cont">
-                            <input type="datetime-local" class="form-control form-boxed" name="train.endDate" value=<%=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(new Date())%> style="width:400px;" required="">
+                            <input type="datetime-local" class="form-control form-boxed" name="endDate" value=<%=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").format(new Date())%> style="width:400px;" required="">
                         </div>
                     </div>
                     <div class="form-group-col-2">

@@ -18,25 +18,23 @@
         </action>
         <action name="studentModifyInfo" class="studentAction" method="modifyInfo">
             <result name="success" type="redirect">/student/main.jsp</result>
-            <result name="error" type="redirect">/student/modifyInfo.jsp</result>
-            <result name="input" type="redirect">/student/modifyInfo.jsp</result>
+            <result name="error" type="redirect">/student/error.jsp</result>
         </action>
         <action name="studentModifyPassword" class="studentAction" method="modifyPassword">
             <result name="success" type="redirect">/student/main.jsp</result>
-            <result name="error" type="redirect">/student/modifyPassword.jsp</result>
-            <result name="input" type="redirect">/student/modifyPassword.jsp</result>
+            <result name="error">/student/modifyPassword.jsp</result>
         </action>
         <action name="viewAllStudents" class="studentAction" method="viewAllStudents">
             <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="deleteStudent" class="studentAction" method="deleteStudent">
             <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="modifyStudent" class="studentAction" method="modifyInfo">
             <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
-            <result name="error" type="redirect">/admin/modifyStudent.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
 
         <action name="adminLogin" class="adminAction" method="login">
@@ -46,81 +44,81 @@
         </action>
         <action name="adminModifyPassword" class="adminAction" method="modifyPassword">
             <result name="success" type="redirect">/admin/admin.jsp</result>
-            <result name="error" type="redirect">/admin/modifyPassword.jsp</result>
+            <result name="error">/admin/modifyPassword.jsp</result>
         </action>
         <action name="adminModifyInfo" class="adminAction" method="modifyInfo">
             <result name="success" type="redirect">/admin/admin.jsp</result>
-            <result name="error" type="redirect">/admin/modifyInfo.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
 
         <action name="addAttendance" class="attendanceAction" method="addAttendance">
             <result name="success" type="redirect">/admin/addAttendance.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="deleteAttendance" class="attendanceAction" method="deleteAttendance">
             <result name="success" type="redirect">/admin/listAttendance.jsp</result>
-            <result name="error" type="redirect">/admin/listAttendance.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="listAttendance" class="attendanceAction" method="listAttendance">
             <result name="success" type="redirect">/admin/listAttendance.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="listStudentAttendances" class="attendanceAction" method="listStudentAttendances">
             <result name="success" type="redirect">/admin/viewStudentAttendance.jsp</result>
-            <result name="error" type="redirect">/admin/viewAllStudents.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="viewAttendances" class="attendanceAction" method="viewAttendances">
             <result name="success" type="redirect">/student/viewAttendance.jsp</result>
-            <result name="error" type="redirect">/student/main.jsp</result>
+            <result name="error" type="redirect">/student/error.jsp</result>
         </action>
 
         <action name="trainPre" class="trainAction" method="pre">
             <result name="success" type="redirect">/admin/addTrain.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="addTrain" class="trainAction" method="addTrain">
             <result name="success" type="redirect">/admin/addTrain.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="listTrains" class="trainAction" method="getTrains">
             <result name="success" type="redirect">/admin/listTrains.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="listStudentTrains" class="trainAction" method="listStudentTrains">
             <result name="success" type="redirect">/student/listMyTrains.jsp</result>
-            <result name="error" type="redirect">/student/main.jsp</result>
+            <result name="error" type="redirect">/student/error.jsp</result>
         </action>
         <action name="deleteTrain" class="trainAction" method="deleteTrain">
             <result name="success" type="redirect">/admin/listTrains.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="modifyTrain" class="trainAction" method="modifyTrain">
             <result name="success" type="redirect">/admin/listTrains.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="viewStudentTrain" class="trainAction" method="viewStudentTrain">
             <result name="success" type="redirect">/student/viewTrain.jsp</result>
-            <result name="error" type="redirect">/student/listMyTrains.jsp</result>
+            <result name="error" type="redirect">/student/error.jsp</result>
         </action>
         <action name="listTrainDetail" class="trainAction" method="listTrainDetail">
             <result name="success" type="redirect">/admin/viewStudentsTrain.jsp</result>
-            <result name="error" type="redirect">/admin/listTrains.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="viewPerformance" class="studentAction" method="viewPerformance">
             <result name="success" type="redirect">/student/viewPerformance.jsp</result>
-            <result name="error" type="redirect">/student/main.jsp</result>
+            <result name="error" type="redirect">/student/error.jsp</result>
         </action>
         <action name="viewStudentPerformance" class="adminAction" method="viewStudentPerformance">
             <result name="success" type="redirect">/admin/viewStudentPerformance.jsp</result>
-            <result name="error" type="redirect">/admin/viewAllStudents.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="addEvaluation" class="evaluationAction" method="addEvaluation">
             <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
-            <result name="error" type="redirect">/admin/addEvaluation.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="modifyEvaluation" class="evaluationAction" method="modifyEvaluation">
-            <result name="success" type="redirect">/admin/viewEvaluation.jsp</result>
-            <result name="error" type="redirect">/admin/admin.jsp</result>
+            <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
+            <result name="error" type="redirect">/admin/error.jsp</result>
         </action>
         <action name="preEvaluation" class="evaluationAction" method="preEvaluation">
             <result name="addEvaluation" type="redirect">/admin/addEvaluation.jsp</result>
@@ -128,7 +126,7 @@
         </action>
         <action name="viewEvaluation" class="evaluationAction" method="listEvaluation">
             <result name="success" type="redirect">/student/viewEvaluation.jsp</result>
-            <result name="error" type="redirect">/student/main.jsp</result>
+            <result name="error" type="redirect">/student/error.jsp</result>
         </action>
     </package>
 </struts>

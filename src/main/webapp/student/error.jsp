@@ -120,6 +120,7 @@
                         <h2 class="title"><i class="icon-home"></i>济南大学ACM实验室管理系统</h2>
                     </header>
                     <hr>
+                    ${error}
                 </section>
                 <div id="container"></div>
                 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">

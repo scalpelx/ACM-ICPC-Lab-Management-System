@@ -125,6 +125,7 @@
                         <div class="form-label">旧密码：</div>
                         <div class="form-cont">
                             <input type="password" placeholder="请输入旧密码" class="form-control form-boxed" name="oldPassword" style="width:400px;">
+                            ${error}
                         </div>
                     </div>
                     <div class="form-group-col-2">

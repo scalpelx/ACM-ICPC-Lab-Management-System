@@ -111,7 +111,6 @@
         </header>
         <main class="main-cont content mCustomScrollbar">
             <!--开始::内容-->
-            ${error}
             <div class="page-wrap">
                 <section class="page-hd">
                     <header>
