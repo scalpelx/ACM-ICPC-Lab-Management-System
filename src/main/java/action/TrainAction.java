@@ -76,7 +76,7 @@ public class TrainAction extends ActionSupport {
         for (String scholar : scholars) {
             Student student = studentService.getStudentByScholar(scholar);
             SendMessage sendMessage = new SendMessage();
-            //sendMessage.send(student.getPhone());
+            sendMessage.send(student.getPhone());
             students.add(student);
         }
         train.setStudents(students);
