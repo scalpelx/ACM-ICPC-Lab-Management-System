@@ -26,10 +26,6 @@
             <result name="error" type="redirect">/student/modifyPassword.jsp</result>
             <result name="input" type="redirect">/student/modifyPassword.jsp</result>
         </action>
-        <!-- action name="studentView" class="studentAction" method="view">
-            <result name="success" type="redirect">/student/viewInfo.jsp</result>
-            <result name="error" type="redirect">/student/main.jsp</result>
-        </action -->
         <action name="viewAllStudents" class="studentAction" method="viewAllStudents">
             <result name="success" type="redirect">/admin/viewAllStudents.jsp</result>
             <result name="error" type="redirect">/admin/admin.jsp</result>

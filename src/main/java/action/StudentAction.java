@@ -128,20 +128,7 @@ public class StudentAction extends ActionSupport{
             return ERROR;
         }
     }
-/*
-    public String view() {
-        Map session = ActionContext.getContext().getSession();
-        Student student = (Student) session.get("student");
-        student =  studentService.getStudentByScholar(student.getScholar());
-        if (student != null) {
-            session.put("student", student);
-            return SUCCESS;
-        } else {
-            session.put("viewError", "查询失败！");
-            return ERROR;
-        }
-    }
-*/
+
     public String viewAllStudents() {
         Map session = ActionContext.getContext().getSession();
         List students = studentService.getAllStudent();
