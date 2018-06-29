@@ -1,1 +1,1 @@
-# Graduation-Project
+Java EE Maven Project
