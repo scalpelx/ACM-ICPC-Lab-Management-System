@@ -1,1 +1,1 @@
-Java EE Maven Project
+Java EE SSH Framework Maven Project
